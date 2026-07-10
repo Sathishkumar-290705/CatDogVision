@@ -1,0 +1,29 @@
+# Virtual environment
+cat_dog_env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Dataset (usually too large for git)
+dataset/
+data/
+*.jpg
+*.png
+*.jpeg
+
+# Model files (often large)
+*.keras
+*.h5
+saved_models/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
