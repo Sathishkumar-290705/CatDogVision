@@ -3,12 +3,14 @@ from tensorflow.keras import layers, models
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from tensorflow.keras.preprocessing import image
+
+
 # ── 1. PATHS ──────────────────────────────────────────────────────────────────
-TRAIN_DIR = r"E:\PROJECTS\FIND CAT OR DOG\Data\train"
-VAL_DIR   = r"E:\PROJECTS\FIND CAT OR DOG\Data\validation"
+TRAIN_DIR = r"E:\PROJECTS\CatDog Classifier\Data\train"
+VAL_DIR   = r"E:\PROJECTS\CatDog Classifier\Data\validation"
 IMG_SIZE  = (150, 150)   # resize every image to 150×150
 BATCH     = 32
-EPOCHS    = 20
+EPOCHS    = 30
 
 # ── 2. DATA AUGMENTATION ──────────────────────────────────────────────────────
 # Only applied to TRAINING data — val data is never augmented
@@ -36,6 +38,7 @@ train_generator = train_datagen.flow_from_directory(
     class_mode  = "binary"     # binary = 2 classes (dog=1, cat=0)
 )
 
+print(train_generator.class_indices)
 
 val_generator = val_datagen.flow_from_directory(
     VAL_DIR,
@@ -49,7 +52,6 @@ val_generator = val_datagen.flow_from_directory(
 model = models.Sequential([
     # --- Conv Block 1 ---
     # 32 kernels of 3×3 sliding on 150×150×3 image → 148×148×32
-    
     layers.Conv2D(32, (3, 3), activation="relu", input_shape=(150, 150, 3)),
     # Max Pooling shrinks 148×148 → 74×74
     layers.MaxPooling2D(2, 2),
